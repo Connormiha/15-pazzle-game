@@ -14,6 +14,8 @@ import bem from 'bem-css-modules';
 
 const b = bem(style);
 
+const DEFAULT_FIELD_SIZE = 4;
+
 interface IAppProps {
     field: IFieldStore;
     game: IGameStore;
@@ -25,7 +27,7 @@ interface IAppProps {
 
 class App extends React.Component<IAppProps> {
     componentDidMount(): void {
-        this.props.onStartGame(4);
+        this.props.onStartGame(DEFAULT_FIELD_SIZE);
     }
 
     componentDidUpdate(prevProps: IAppProps): void {
