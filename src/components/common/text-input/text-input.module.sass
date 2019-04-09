@@ -1,0 +1,51 @@
+.text-input
+    position: relative
+
+    &__input
+        border-radius: 4px
+        outline: 0
+        color: #000
+        border: 1px solid #ccc
+        background: #fff
+        font-size: 16px
+        padding: 0 8px
+        width: 100%
+        box-sizing: border-box
+        transition: all 0.3s
+
+        &::placeholder
+            color: #afb2bf
+            font-weight: 400
+
+        &:focus
+            border-color: #1788fb
+            box-shadow: 0 2px 6px 0 rgba(128, 152, 213, 0.15)
+
+        &_invalid
+            border-color: #f27669
+
+            &:focus
+                border-color: #f27669
+
+        &:disabled
+            box-shadow: none
+            pointer-events: none
+            opacity: 0.5
+
+        &:read-only
+            opacity: 0.8
+
+        &_size
+            &_small
+                height: 32px
+                line-height: 32px
+
+            &_medium
+                height: 40px
+                line-height: 40px
+                padding: 0 20px
+
+            &_large
+                height: 50px
+                line-height: 50px
+                padding: 0 16px
