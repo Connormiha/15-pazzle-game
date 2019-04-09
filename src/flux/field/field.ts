@@ -10,8 +10,8 @@ export const generate = (size: number): AnyAction =>
 export const move = (target: number): AnyAction =>
     ({type: FIELD_MOVE, target});
 
-export const moveBack = (target: number): AnyAction =>
-    ({type: FIELD_MOVE_BACK, target});
+export const moveBack = (): AnyAction =>
+    ({type: FIELD_MOVE_BACK});
 
 const getDefaultState = (): IFieldStore =>
     schema.field;

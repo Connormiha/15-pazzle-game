@@ -1,3 +1,4 @@
+import style from './app.module.sass';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -6,15 +7,19 @@ import {IFieldStore, IGameStore} from 'flux/types';
 import * as gameActions from 'flux/game';
 import * as fieldActions from 'flux/field';
 import Field from 'components/field';
+import Controls from 'components/controls';
 import {isWin} from 'lib/utils';
 import {batchActions} from 'redux-batched-actions';
+import bem from 'bem-css-modules';
+
+const b = bem(style);
 
 interface IAppProps {
     field: IFieldStore;
     game: IGameStore;
     onStartGame(size: number): void;
     onMove(id: number): void;
-    onMoveBack(id: number): void;
+    onMoveBack(): void;
     onWin(): void;
 }
 
@@ -31,12 +36,34 @@ class App extends React.Component<IAppProps> {
         }
     }
 
+    private _renderControls(): React.ReactNode {
+        const {onMoveBack, onStartGame, field} = this.props;
+
+        if (!field.position.length) {
+            return null;
+        }
+
+        return (
+            <Controls
+                onMoveBack={onMoveBack}
+                onChangeSize={onStartGame}
+                fieldSize={Math.sqrt(field.position.length)}
+                isAvailableHistory={!!field.history.length}
+            />
+        );
+    }
+
     render(): React.ReactNode {
         return (
-            <Field
-                field={this.props.field.position}
-                onMove={this.props.onMove}
-            />
+            <div className={b()}>
+                {this._renderControls()}
+                <div className={b('field')}>
+                    <Field
+                        field={this.props.field.position}
+                        onMove={this.props.onMove}
+                    />
+                </div>
+            </div>
         );
     }
 }
@@ -60,10 +87,10 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
             );
         },
 
-        onMoveBack(id: number): void {
+        onMoveBack(): void {
             dispatch(
                 batchActions([
-                    fieldActions.moveBack(id)
+                    fieldActions.moveBack()
                 ])
             );
         },

@@ -1,6 +1,7 @@
 import style from './field.module.sass';
 import React from 'react';
 import FieldItem from 'components/field-item';
+import {isCanMove} from 'lib/utils';
 import bem from 'bem-css-modules';
 
 const b = bem(style);
@@ -20,7 +21,7 @@ export default class Field extends React.PureComponent<IFieldItemProps> {
                 <React.Fragment key={id}>
                     <FieldItem
                         id={id}
-                        isDisabled={false}
+                        isDisabled={!isCanMove(field, i)}
                         onClick={onMove}
                     />
                     {((i + 1) % size === 0) && <div />}
@@ -34,7 +35,7 @@ export default class Field extends React.PureComponent<IFieldItemProps> {
             <article
                 className={b()}
             >
-                <div className={b('content')}>
+                <div>
                     {this._renderItems()}
                 </div>
             </article>

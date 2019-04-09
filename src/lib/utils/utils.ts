@@ -18,6 +18,9 @@ const arrayShuffle = (arr: number[]): void => {
     }
 };
 
+export const isCanMove = (fieldPosition: number[], target: number): boolean =>
+    target !== getNewPosition(fieldPosition, target);
+
 export const moveFieldItem = (fieldPosition: number[], target: number): number[] => {
     const index = fieldPosition.indexOf(target);
     const newPosition = getNewPosition(fieldPosition, index);
