@@ -15,16 +15,17 @@ module.exports = {
     testURL: 'http://localhost',
     transform: {
         '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
-        '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
+        '.+\\.module\\.(css|sass)$': 'jest-css-modules-transform',
         '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest/fileTransform.js'
     },
     transformIgnorePatterns: [
-        '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
-        '^.+\\.module\\.(css|sass|scss)$'
+        '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$'
+    ],
+    moduleDirectories: [
+        'node_modules', 'src'
     ],
     moduleNameMapper: {
-        '^react-native$': 'react-native-web',
-        '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
+        '^react-native$': 'react-native-web'
     },
     moduleFileExtensions: [
         'web.js',

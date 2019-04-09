@@ -34,6 +34,10 @@ class App extends React.Component<IAppProps> {
         if (position !== prevProps.field.position && isWin(position)) {
             this.props.onWin();
         }
+
+        if (this.props.game.state === 'win' && prevProps.game.state !== 'win') {
+            alert('Победили!!!');
+        }
     }
 
     private _renderControls(): React.ReactNode {
