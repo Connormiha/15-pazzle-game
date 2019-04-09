@@ -1,11 +1,12 @@
 .button
     align-items: center
     justify-content: center
+    background: #1788fb
     box-sizing: border-box
-    border-style: solid
-    border-width: 1px
+    border: 0
     border-radius: 4px
     cursor: pointer
+    color: #fff
     display: inline-flex
     font-size: 16px
     max-width: 100%
@@ -15,32 +16,27 @@
     text-decoration: none
     transition: all 0.3s
 
+
+    &:active,
+    &:hover,
+    &:focus
+        background: #0b77d8
+
     &_size
         &_small
             font-size: 12px
             height: 24px
-            padding: 0 16px
+            padding: 0 6px
 
         &_medium
             font-size: 12px
             height: 32px
-            padding: 0 16px
+            padding: 0 12px
 
         &_large
             font-size: 18px
             height: 50px
             padding: 0 32px
-
-    &_style
-        &_color
-            background: #1788fb
-            border: 0
-            color: #fff
-
-            &:active,
-            &:hover,
-            &:focus
-                background: #0b77d8
 
     &:disabled
         pointer-events: none

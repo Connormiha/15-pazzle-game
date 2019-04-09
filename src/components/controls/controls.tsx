@@ -7,7 +7,7 @@ import bem from 'bem-css-modules';
 const b = bem(style);
 
 interface IControlsProps {
-    isAvailableHistory: boolean;
+    historyCount: number;
     fieldSize: number;
     onMoveBack(): void;
     onChangeSize(size: number): void;
@@ -39,16 +39,22 @@ export default class Controls extends React.PureComponent<IControlsProps, IContr
 
     private _renderFieldSizeForm(): React.ReactNode {
         return (
-            <form onSubmit={this._handleSubmitSize}>
-                <TextInput
-                    value={this.state.fieldSizeValue}
-                    onChange={this._handleChangeSize}
-                    type="number"
-                    size="medium"
-                    min={2}
-                    max={100}
-                    step={1}
-                />
+            <form
+                onSubmit={this._handleSubmitSize}
+                className={b('form')}
+            >
+                <label className={b('label')}>
+                    Размер поля
+                    <TextInput
+                        value={this.state.fieldSizeValue}
+                        onChange={this._handleChangeSize}
+                        type="number"
+                        size="small"
+                        min={2}
+                        max={100}
+                        step={1}
+                    />
+                </label>
                 <Button
                     size="medium"
                 >
@@ -58,21 +64,33 @@ export default class Controls extends React.PureComponent<IControlsProps, IContr
         );
     }
 
+    private _renderHistoryCount(): React.ReactNode {
+        return (
+            <div className={b('count')}>
+                {'Число ходов: '}
+                <b>
+                    {this.props.historyCount}
+                </b>
+            </div>
+        );
+    }
+
     render(): React.ReactNode {
-        const {isAvailableHistory, onMoveBack} = this.props;
+        const {historyCount, onMoveBack} = this.props;
 
         return (
             <section
                 className={b()}
             >
                 <Button
-                    disabled={!isAvailableHistory}
+                    disabled={historyCount === 0}
                     onClick={onMoveBack}
                     size="medium"
                 >
-                    Назад
+                    Ход назад
                 </Button>
                 {this._renderFieldSizeForm()}
+                {this._renderHistoryCount()}
             </section>
         );
     }

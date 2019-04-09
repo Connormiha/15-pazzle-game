@@ -35,9 +35,7 @@ export default class Field extends React.PureComponent<IFieldItemProps> {
             <article
                 className={b()}
             >
-                <div>
-                    {this._renderItems()}
-                </div>
+                {this._renderItems()}
             </article>
         );
     }

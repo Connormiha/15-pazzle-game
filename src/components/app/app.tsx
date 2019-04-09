@@ -48,7 +48,7 @@ class App extends React.Component<IAppProps> {
                 onMoveBack={onMoveBack}
                 onChangeSize={onStartGame}
                 fieldSize={Math.sqrt(field.position.length)}
-                isAvailableHistory={!!field.history.length}
+                historyCount={field.history.length}
             />
         );
     }
