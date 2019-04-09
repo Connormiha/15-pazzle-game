@@ -1,8 +1,3 @@
-export interface IGameHistoryItem {
-    from: number;
-    to: number;
-}
-
 export type IGameState = 'win' | 'in-progress' | 'not-started' | 'fail';
 
 export interface IGameStore {
@@ -11,5 +6,5 @@ export interface IGameStore {
 
 export interface IFieldStore {
     position: number[];
-    history: IGameHistoryItem[];
+    history: number[];
 }

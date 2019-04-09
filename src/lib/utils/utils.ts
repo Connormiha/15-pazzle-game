@@ -1,7 +1,8 @@
-export const filedGenerator = (size: number): number[] => {
+export const generateField = (size: number): number[] => {
     const result = [];
+    const totalSize = size * size;
 
-    for (let i = 0; i <= size; i++) {
+    for (let i = 0; i < totalSize; i++) {
         result.push(i);
     }
 
@@ -10,7 +11,7 @@ export const filedGenerator = (size: number): number[] => {
     return result;
 };
 
-export const arrayShuffle = (arr: number[]): void => {
+const arrayShuffle = (arr: number[]): void => {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = (Math.random() * (i + 1)) | 0;
         [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -18,14 +19,15 @@ export const arrayShuffle = (arr: number[]): void => {
 };
 
 export const moveFieldItem = (fieldPosition: number[], target: number): number[] => {
-    const newPosition = getNewPosition(fieldPosition, target);
+    const index = fieldPosition.indexOf(target);
+    const newPosition = getNewPosition(fieldPosition, index);
     const newField = fieldPosition.slice();
-    [newField[target], newField[newPosition]] = [newField[newPosition], newField[target]];
+    [newField[index], newField[newPosition]] = [newField[newPosition], newField[index]];
 
     return newField;
 };
 
-export const getNewPosition = (fieldPosition: number[], target: number): number => {
+const getNewPosition = (fieldPosition: number[], target: number): number => {
     const width = Math.sqrt(fieldPosition.length);
     const row = target / width | 0;
     const col = target % width;
@@ -49,9 +51,12 @@ export const getNewPosition = (fieldPosition: number[], target: number): number 
     return target;
 };
 
-export const move = (arr, target) => {
-    const newPosition = getNewPosition(arr, target);
-console.warn(newPosition);
-[arr[target], arr[newPosition]] = [arr[newPosition], arr[target]];
-return arr;
-}
+export const isWin = (fieldPosition: number[]): boolean => {
+    for (let i = 0; i < fieldPosition.length - 1; i++) {
+        if (i + 1 !== fieldPosition[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};

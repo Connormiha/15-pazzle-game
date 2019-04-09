@@ -1,4 +1,4 @@
-import style from 'field-item.module.sass';
+import style from './field-item.module.sass';
 import React from 'react';
 import bem from 'bem-css-modules';
 
@@ -14,11 +14,11 @@ export default class FieldItem extends React.PureComponent<IFieldItemProps> {
     private _handleClick = (): void => {
         this.props.onClick(this.props.id);
     }
-    
+
     render(): React.ReactNode {
         return (
             <button
-                className={b()}
+                className={b({empty: this.props.id === 0})}
                 disabled={this.props.isDisabled}
                 onClick={this._handleClick}
             >

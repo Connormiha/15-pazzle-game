@@ -1,4 +1,4 @@
-import style from 'field-item.module.sass';
+import style from './field.module.sass';
 import React from 'react';
 import FieldItem from 'components/field-item';
 import bem from 'bem-css-modules';
@@ -7,31 +7,36 @@ const b = bem(style);
 
 interface IFieldItemProps {
     field: number[];
+    onMove: (id: number) => void;
 }
 
 export default class Field extends React.PureComponent<IFieldItemProps> {
-    private _handleClick = (id: number): void => {
-        console.log(id);
-    }
-    
     private _renderItems(): React.ReactNode {
-        return this.props.field.map((id: number) =>
+        const {field, onMove} = this.props;
+        const size = Math.sqrt(field.length);
+
+        return field.map((id: number, i: number) =>
             (
-                <FieldItem
-                    id={id}
-                    isDisabled={false}
-                    onClick={this._handleClick}
-                />
+                <React.Fragment key={id}>
+                    <FieldItem
+                        id={id}
+                        isDisabled={false}
+                        onClick={onMove}
+                    />
+                    {((i + 1) % size === 0) && <div />}
+                </React.Fragment>
             )
         );
     }
-    
+
     render(): React.ReactNode {
         return (
             <article
                 className={b()}
             >
-                {this._renderItems()}
+                <div className={b('content')}>
+                    {this._renderItems()}
+                </div>
             </article>
         );
     }
